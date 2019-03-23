@@ -24,39 +24,26 @@ async function pathLoop(path){
     // solidArray = arrayForPath;
 }
 
+var path=[];
+function pathMaker(){
+    for (let i = 0; i < arrayForPath.length; i++) {
+        path.push(arrayForPath[i].o.join('/'));
+    }
+}
 
-async function makeArray(mainPath, populateBigArray){
-    await pathLoop(mainPath);
+
+async function makeArray(mainPath){
+await pathLoop(mainPath);
     solidArray = [];
     for (let i = 0; i < arrayForPath.length; i++) {
         solidArray.push(arrayForPath[i].o.join('/'));
     }
-    console.log('solidArray', solidArray);
-    // solidArray=[];
-    if(populateBigArray){
-        bigArray.push(solidArray);
-        console.log('bigArray', bigArray);
-
-    }
-
 }
-
-// strungArray = 'users';
-// async function deep(num){
-//     await pathLoop('users');
-
-//     makeArray(true);
-// }
-
-// function addToArray(num1, num2, pos){
-//     savedPaths[num1].splice(num2, 0, solidArray[pos])                //insert new paths 1++ index
-//     console.log('savedPaths', savedPaths);
-
-// }
 function remove(array, pos){
     array.splice(pos, 1);
 }
 //================================================
+var returnArray=[];
 async function getLastElement(mainPath){
     console.log('function that pulls last element(s) from end of the path of the pathLoop function');
     returnArray = [];
@@ -68,160 +55,61 @@ async function getLastElement(mainPath){
 }
 //================================================
 
-async function doIt(mainPath, node, value){
-    await makeArray(mainPath);
-    await getLastElement(mainPath);
-
-    for(var i in returnArray){
-        if(returnArray[i]==node && takeInPath(solidArray[i])==value){
-            console.log('true!');
-            console.log('returned', returnArray[i]);
-            console.log('path: ', solidArray[i]);
-
+var posOfText = -1;
+async function findBasedOnParams(text, param){
+    console.log('function that finds email and returns pos', );
+    await pathLoop('users');
+    console.log('path', path);
+    for(var i in arrayOfVal){   //arrayOfVal - holds all data
+        if(arrayOfVal[i][text]==param){
+            posOfText = i;
+            console.log(text+ "found at pos found at " + posOfText);
+            console.log('path2', path);
         }
     }
 }
 
+async function lookUpParam(path, param, passedNum){
+    console.log('function that returns a node based on <num> in branch and the parameter type {obj}');
+    await pathLoop(path);
 
+    console.log(arrayOfVal[passedNum][param]);
+}
 
+//================================================
 
-
-
-
-
-
-
-
-
-
-
-// async function something(node, value){
-//     await pathLoop('users');
-//     makeArray();
-    
-//     for(var i=0; i<=arrayForPath.length;i++){
-//     // for(var i in arrayForPath){
-//         makeArray();
-//         await pathLoop(solidArray[i]);
-//         makeArray();
-//         console.log('paths', solidArray[i]);
-
-//         if(arrayForPath[0].o[arrayForPath[i].o.length-1]==node){
-//             console.log('true!');
-//             console.log('saved path', solidArray[i]);
-//             await takeInPath(solidArray[i]);
-//             if(snap==value){
-//                 console.log('snap', snap);
-//                 console.log('extra true!');
-//             }else{
-//                 pathLoop('users');
-//                 i++;
-//             }
-//         }else{
-//             pathLoop('users');
-//             console.log('false');
-//         }
-//     }
-
-
-    // savedPaths[0] = solidArray[0];
-
-    // await pathLoop(savedPaths[0]);
-    // makeArray();
-    // savedPaths[1] = solidArray;
-    //================================================
-
-    // await pathLoop('users');
-
-    // makeArray(true);
-    // await pathLoop(solidArray[start]);
-    // await makeArray();
-    // addToArray(start, start+1);
-
-    //================================================
-    // await pathLoop('users');
-    // makeArray();
-    // firstLevel = new ChildArray(solidArray[0], '');
-
-    // await pathLoop(firstLevel.parent);
-    // makeArray();
-    // firstLevel.child = solidArray;
-
-    // for(var i=0; i<=savedPaths[1].length; i++){
-
-    // }
-
-
-
-
-// }
-    
-var savedPaths = {
-    '0':0,
-};
-
-
-function ChildArray(parent, child){
-    var obj = {parent: parent, child: child }
-    return obj;
+async function something(){
+    await pathMaker();
+    for(var i in path){
+        await doIt(path[i], i);
+    }
 }
 
 
+//================================================
+var oneBefore = [];
+var posOfNode = -1;
+var i=0;
+async function doIt(mainPath, num){
+    console.log('function that takes a path, copares it to a node, and returns that node value', );
 
-// function ArrayMe(old, arr1, arr2){
-//    var meArray = [[arr1], [arr2]];
-//    return meArray;
-// }
+    await pathLoop(mainPath);
+    pathMaker();
 
+    await getLastElement(path[num]);
+}
 
-// [
-//     [
-//       "users/-LacInJMVULfIgn9aGeX"
-//     ],
-//     [
-//       [
-//         "users/-LacInJMVULfIgn9aGeX/email",
-//         "users/-LacInJMVULfIgn9aGeX/friends",
-//         "users/-LacInJMVULfIgn9aGeX/friendsPinned",
-//         "users/-LacInJMVULfIgn9aGeX/requests",
-//         "users/-LacInJMVULfIgn9aGeX/status"
-//       ]
-//     ]
-//   ]
-
-
-
-
-    //     endArray = [];
-    //     for(let i=0; i< arrayOfVal.length; i++){
-    //         endArray.push(arrayForPath[i].o[arrayForPath[i].o.length-1])
-    //         // console.log('arrayForPath end: ', arrayForPath[0].o[i]);
-
-    //     }
-
-    //     for(let i=0; i<=endArray.length; i++){
-    //         if(endArray[i]==node){
-    //             savedPos=i;
-    //         }
-    //     }
-
-
-
-    // });
 
     
-    // return new Promise((resolve)=>{
-    //     resolve(arrayOfVal);
-    //     console.log('strungArray', strungArray);
-    // });
 
-
-
+//================================================
 var snap;
+var gSnap;
 async function takeInPath(path){
     arrayForPath=[], arrayOfVal=[], strungArray=[];
     let refMe = await db.ref(path).once('value')
     .then((snapshot)=>{
+        gSnap=snapshot;
         snap = snapshot.A.B;
         console.log('snap', snap);
     });
