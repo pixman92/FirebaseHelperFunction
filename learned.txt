@@ -1,0 +1,9 @@
+Learned:
+
+pathLoop('users');
+pathMaker(); - makes paths for all child elements
+getLastElement(path); - gets all the child names
+//chose a child - by index
+pathLoop(path[index])
+pathMaker();
+
