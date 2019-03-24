@@ -20,9 +20,7 @@ async function pathLoop(path){
             
         });
         if(arrayOfVal.length==0){
-            var num = path.lastIndexOf("/");
-            backupPathStr= path.substr(0, num);
-            console.log('backupPathStr', backupPathStr);
+            pathLoop(backUpFunction(path));
         }
         console.log('arrayForPath', arrayForPath);
         console.log('arrayOfVal', arrayOfVal);
@@ -92,8 +90,17 @@ async function lookUpParam(path, param, passedNum){
     console.log('function that returns a node based on <num> in branch and the parameter type {obj}');
     await pathLoop(path);
 
+
+
+
     console.log(arrayOfVal[passedNum][param]);
     savedReturnedNode = arrayOfVal[passedNum][param];
+
+    if(savedReturnedNode==undefined){
+        await pathLoop(backUpFunction(path));
+        console.log(arrayOfVal[passedNum][param]);
+        savedReturnedNode = arrayOfVal[passedNum][param];
+    }
 }
 
 //================================================
@@ -107,31 +114,24 @@ async function something(){
 
 
 //================================================
-
-async function afterKnowingEmail(myPath, numDeep){
+var pathMe="";
+async function afterKnowingEmail(myPath, level, index){
     console.log('function that pulls Value for a searched and deeper value, serval branches deep');
-
-    path = myPath;
-
-    for(var i=0; i<=numDeep; i++){
-        await pathLoop(path);
+    if(backupPathStr.length==0){
+        await pathLoop(myPath);
         await pathMaker(); //- makes paths for all child elements
-        await getLastElement(path[0]); //- gets all the child names
+        await getLastElement(path[level]); //- gets all the child names
         //chose a child - 
-        console.log('value:', arrayOfVal);
+        console.log('value:'+returnArray[index], arrayOfVal[index]);
+    }else{
+        // await pathLoop(backupPathStr);
+        // await pathMaker(); //- makes paths for all child elements
+        await getLastElement(backupPathStr); //- gets all the child names
+        //chose a child - 
+        console.log('endChild', returnArray);
+        console.log('value:'+returnArray[index], arrayOfVal[index]);
     }
 
-    // await pathLoop('users');
-    // await pathMaker(); //- makes paths for all child elements
-    // await getLastElement(path[0]); //- gets all the child names
-    // //chose a child - by index
-    // await pathLoop(makePathString(path[index1], returnArray[index2]));
-    // await pathMaker();
-
-    // await getLastElement(path[0]);
-    // console.log('value:', arrayOfVal);
-
-    
 }
 
 //================================================
@@ -165,6 +165,9 @@ async function takeInPath(path){
 
 //================================================
 
-function savePathBefore(){
-
+function backUpFunction(path){
+    var num = path.lastIndexOf("/");
+    backupPathStr= path.substr(0, num);
+    console.log('backupPathStr', backupPathStr);
+    return backupPathStr;
 }
