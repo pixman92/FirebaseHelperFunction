@@ -14,7 +14,7 @@ A set of functions to help with pulling data from Firebase Realtime Database.
 * **example:** pathLoop('users', true)
 
 **2. nodeBasedOnArray(startingPath, pathPos)**
-**startingPath** - path that is your root directory
+* **startingPath** - path that is your root directory
 * **pathPos** - this is an array, of which, each element is a index of the node to go through
 * **return** - pathTaken - the path that got you the value printed in console. pathReturnedValue - the value at the end of the node that you worked towards
 * **example:** 
