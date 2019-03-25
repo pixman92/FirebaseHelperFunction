@@ -65,6 +65,6 @@ A set of functions to help with pulling data from Firebase Realtime Database.
 * **path** - root path
 * **returns:** - snap - from the path passed index
 
-**backUpFunction**
+**backUpFunction(path)**
 * function that backs up 1 level if the current string pased through pathLoop() results in **undefined** value
 * **path** - root path to check 

@@ -1,5 +1,9 @@
 var db = firebase.database();
 
+function alertMe(){
+    alert('hey there');
+}
+
 var arrayForPath=[], arrayOfVal=[], me;
 var strungArray=[];
 var tmp;
