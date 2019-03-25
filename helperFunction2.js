@@ -6,7 +6,7 @@ var savedPos = -1;
 var bigArray= [];
 var solidArray = [];
 var backupPathStr = [];
-async function pathLoop(path){
+async function pathLoop(path, safety){
     // spits out next node in tree of paths
 
     arrayForPath=[], arrayOfVal=[], strungArray=[];
@@ -19,15 +19,23 @@ async function pathLoop(path){
             arrayOfVal.push(el.val());
             
         });
-        if(arrayOfVal.length==0){
-            pathLoop(backUpFunction(path));
-        }
+        // if(safety){
+            if(arrayOfVal.length==0){
+                pathLoop(backUpFunction(path));
+            }
+
+        // }
         console.log('arrayForPath', arrayForPath);
         console.log('arrayOfVal', arrayOfVal);
         // makeArray();
     });
     // solidArray = arrayForPath;
 }
+
+
+//================================================
+
+
 
 var path=[];
 function pathMaker(){
@@ -56,6 +64,47 @@ function makePathString(previous, toAdd){
     toAdd = previous + '/'+ toAdd;
     return toAdd;
 }
+//================================================
+async function makeDeeperDive(runMe){
+    await pathLoop('users');
+    await pathMaker();
+
+    var tmp = [] = path;
+
+    for(var ii=0; ii<=runMe; ii++){
+        // console.log('ii', ii);
+        i=0;
+        for(var i in tmp){
+            console.log('i', i);
+            console.log('tmp[i]', tmp[i]);
+            await pathLoop(tmp[i]);
+            await pathMaker();
+        }
+        tmp = [] = path;
+
+    }
+
+}
+
+var pathReturnedValue = "";
+async function runAndRerun(startingPath, pathPos){
+    console.log('FREAKING AWESSOME FUNCTION - that takes in the initial path, then an array of nodes to drill down to', );
+    await pathLoop(startingPath);
+    await pathMaker();
+
+
+    for(var i=0; i<=pathPos.length;i++){
+        console.log('path', path);
+        console.log('i', i);
+        await pathLoop(await path[pathPos[i]]);
+        await pathMaker();
+        console.log('val', arrayOfVal[pathPos[pathPos.length-1]]);
+    }
+    
+    return  pathReturnedValue = arrayOfVal[pathPos[pathPos.length-1]];
+
+}
+
 
 //================================================
 var returnArray=[];
@@ -89,9 +138,6 @@ var savedReturnedNode;
 async function lookUpParam(path, param, passedNum){
     console.log('function that returns a node based on <num> in branch and the parameter type {obj}');
     await pathLoop(path);
-
-
-
 
     console.log(arrayOfVal[passedNum][param]);
     savedReturnedNode = arrayOfVal[passedNum][param];
@@ -154,6 +200,7 @@ async function doIt(mainPath, num){
 var snap;
 var gSnap;
 async function takeInPath(path){
+    console.log('function that is supposed to give back value from path string, but may be replaced with, get params function', );
     arrayForPath=[], arrayOfVal=[], strungArray=[];
     let refMe = await db.ref(path).once('value')
     .then((snapshot)=>{
@@ -166,6 +213,7 @@ async function takeInPath(path){
 //================================================
 
 function backUpFunction(path){
+    console.log('function that backs up one / lvl then runs through pathLoop()');
     var num = path.lastIndexOf("/");
     backupPathStr= path.substr(0, num);
     console.log('backupPathStr', backupPathStr);
