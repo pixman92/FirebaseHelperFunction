@@ -1,3 +1,5 @@
+var db = firebase.database();
+
 var arrayForPath=[], arrayOfVal=[], me;
 var strungArray=[];
 var tmp;
@@ -110,10 +112,10 @@ async function getLastElement(mainPath, elementSearch){
 //================================================
 
 var posOfText = -1;
-async function findBasedOnParams(text, param){
+async function findBasedOnParams(myPath, text, param){
     console.log('function that finds obj properties and returns pos', );
-    await pathLoop('users');
-    pathMaker();
+    await pathLoop(myPath);
+    await pathMaker();
     console.log('path', path);
     for(var i in arrayOfVal){   //arrayOfVal - holds all data
         if(arrayOfVal[i][text]==param){
@@ -150,25 +152,25 @@ async function something(){
 
 
 //================================================
-var pathMe="";
-async function afterKnowingEmail(myPath, level, index){
-    console.log('function that pulls Value for a searched and deeper value, serval branches deep');
-    if(backupPathStr.length==0){
-        await pathLoop(myPath);
-        await pathMaker(); //- makes paths for all child elements
-        await getLastElement(path[level]); //- gets all the child names
-        //chose a child - 
-        console.log('value:'+returnArray[index], arrayOfVal[index]);
-    }else{
-        // await pathLoop(backupPathStr);
-        // await pathMaker(); //- makes paths for all child elements
-        await getLastElement(backupPathStr); //- gets all the child names
-        //chose a child - 
-        console.log('endChild', returnArray);
-        console.log('value:'+returnArray[index], arrayOfVal[index]);
-    }
+// var pathMe="";
+// async function afterKnowingEmail(myPath, level, index){
+//     console.log('function that pulls Value for a searched and deeper value, serval branches deep');
+//     if(backupPathStr.length==0){
+//         await pathLoop(myPath);
+//         await pathMaker(); //- makes paths for all child elements
+//         await getLastElement(path[level]); //- gets all the child names
+//         //chose a child - 
+//         console.log('value:'+returnArray[index], arrayOfVal[index]);
+//     }else{
+//         // await pathLoop(backupPathStr);
+//         // await pathMaker(); //- makes paths for all child elements
+//         await getLastElement(backupPathStr); //- gets all the child names
+//         //chose a child - 
+//         console.log('endChild', returnArray);
+//         console.log('value:'+returnArray[index], arrayOfVal[index]);
+//     }
 
-}
+// }
 
 //================================================
 var oneBefore = [];
