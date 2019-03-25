@@ -6,7 +6,7 @@ var savedPos = -1;
 var bigArray= [];
 var solidArray = [];
 var backupPathStr = [];
-async function pathLoop(path, safety){
+async function pathLoop(path, makePath){
     // spits out next node in tree of paths
 
     arrayForPath=[], arrayOfVal=[], strungArray=[];
@@ -25,6 +25,9 @@ async function pathLoop(path, safety){
             }
 
         // }
+        if(makePath){
+            pathMaker();
+        }
         console.log('arrayForPath', arrayForPath);
         console.log('arrayOfVal', arrayOfVal);
         // makeArray();
@@ -65,30 +68,10 @@ function makePathString(previous, toAdd){
     return toAdd;
 }
 //================================================
-// async function makeDeeperDive(runMe){
-//     await pathLoop('users');
-//     await pathMaker();
-
-//     var tmp = [] = path;
-
-//     for(var ii=0; ii<=runMe; ii++){
-//         // console.log('ii', ii);
-//         i=0;
-//         for(var i in tmp){
-//             console.log('i', i);
-//             console.log('tmp[i]', tmp[i]);
-//             await pathLoop(tmp[i]);
-//             await pathMaker();
-//         }
-//         tmp = [] = path;
-
-//     }
-
-// }
 
 var pathReturnedValue = "";
 var pathTaken = "";
-async function runAndRerun(startingPath, pathPos){
+async function nodeBasedOnArray(startingPath, pathPos){
     console.log('FREAKING AWESSOME FUNCTION - that takes in the initial path, then an array of nodes to drill down to nodes based on pos in that parameter array');
     await pathLoop(startingPath);
     await pathMaker();
@@ -111,13 +94,17 @@ async function runAndRerun(startingPath, pathPos){
 
 //================================================
 var returnArray=[];
-async function getLastElement(mainPath){
-    console.log('function that pulls last element(s) from end of the path of the pathLoop function');
+var posOfStringElement = -1;
+async function getLastElement(mainPath, elementSearch){
+    console.log('function that pulls last element(s) from end of the path of the pathLoop function. Also, takes in elementString to compare to array and returns that index of element');
     returnArray = [];
     await pathLoop(mainPath);
     for(var i in arrayForPath){
         returnArray.push(arrayForPath[i].o[arrayForPath[i].o.length-1]);
     }
+
+    posOfStringElement = returnArray.indexOf(elementSearch);
+    console.log('posOfStringElement', posOfStringElement);
     console.log('returnArray', returnArray);
 }
 //================================================
