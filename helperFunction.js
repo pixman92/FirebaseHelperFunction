@@ -1,6 +1,6 @@
 var db = firebase.database();
 
-function alertMe(){
+function alertMe2(){
     alert('hey there');
 }
 
