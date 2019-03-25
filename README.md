@@ -34,7 +34,8 @@ A set of functions to help with pulling data from Firebase Realtime Database.
   }
 ]
 ```
-* to get to "john", I can use the nodeBasedOnArray() function - nodeBasedOnArray('users', [0, 0]) because 'users' is my root and 'john' is the 0th element after the first 0th element in my root of 'users'
+* to get to "john", I can use the nodeBasedOnArray() function -   
+**nodeBasedOnArray('users', [0, 0])** because 'users' is my root and 'john' is the 0th element after the first 0th element in my root of 'users'
 
 **3. getLastElement(mainPath, elementSearch)**
 * **mainPath** - the path of which to retrieve the values under it
