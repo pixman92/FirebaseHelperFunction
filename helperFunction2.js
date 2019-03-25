@@ -65,30 +65,31 @@ function makePathString(previous, toAdd){
     return toAdd;
 }
 //================================================
-async function makeDeeperDive(runMe){
-    await pathLoop('users');
-    await pathMaker();
+// async function makeDeeperDive(runMe){
+//     await pathLoop('users');
+//     await pathMaker();
 
-    var tmp = [] = path;
+//     var tmp = [] = path;
 
-    for(var ii=0; ii<=runMe; ii++){
-        // console.log('ii', ii);
-        i=0;
-        for(var i in tmp){
-            console.log('i', i);
-            console.log('tmp[i]', tmp[i]);
-            await pathLoop(tmp[i]);
-            await pathMaker();
-        }
-        tmp = [] = path;
+//     for(var ii=0; ii<=runMe; ii++){
+//         // console.log('ii', ii);
+//         i=0;
+//         for(var i in tmp){
+//             console.log('i', i);
+//             console.log('tmp[i]', tmp[i]);
+//             await pathLoop(tmp[i]);
+//             await pathMaker();
+//         }
+//         tmp = [] = path;
 
-    }
+//     }
 
-}
+// }
 
 var pathReturnedValue = "";
+var pathTaken = "";
 async function runAndRerun(startingPath, pathPos){
-    console.log('FREAKING AWESSOME FUNCTION - that takes in the initial path, then an array of nodes to drill down to', );
+    console.log('FREAKING AWESSOME FUNCTION - that takes in the initial path, then an array of nodes to drill down to nodes based on pos in that parameter array');
     await pathLoop(startingPath);
     await pathMaker();
 
@@ -101,6 +102,8 @@ async function runAndRerun(startingPath, pathPos){
         console.log('val', arrayOfVal[pathPos[pathPos.length-1]]);
     }
     
+    pathTaken = path[pathPos[pathPos.length-1]];
+
     return  pathReturnedValue = arrayOfVal[pathPos[pathPos.length-1]];
 
 }
