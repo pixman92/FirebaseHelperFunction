@@ -18,22 +18,21 @@ A set of functions to help with pulling data from Firebase Realtime Database.
 * **pathPos** - this is an array, of which, each element is a index of the node to go through
 * **return** - pathTaken - the path that got you the value printed in console. pathReturnedValue - the value at the end of the node that you worked towards
 * **example:** 
-[
-  "john",
-  "lots",
-  "",
-  "california",
-  {
-    "-LagYUtBBWv1slu37rJ4": {
-      "UID": "something special"
-    }
-  },
-  {
-    "status": "go away"
-  }
-]
-
-to get to "john", I can use the nodeBasedOnArray() function - nodeBasedOnArray('users', [0, 0]) because 'users' is my root and 'john' is the 0th element after the first 0th element in my root of 'users'
+                [
+                "john",
+                "lots",
+                "",
+                "california",
+                {
+                    "-LagYUtBBWv1slu37rJ4": {
+                    "UID": "something special"
+                    }
+                },
+                {
+                    "status": "go away"
+                }
+                ]
+* to get to "john", I can use the nodeBasedOnArray() function - nodeBasedOnArray('users', [0, 0]) because 'users' is my root and 'john' is the 0th element after the first 0th element in my root of 'users'
 
 **3. getLastElement(mainPath, elementSearch)**
 * **mainPath** - the path of which to retrieve the values under it
